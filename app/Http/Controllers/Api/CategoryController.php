@@ -34,7 +34,8 @@ class CategoryController extends Controller
         ]);
         $category = Category::create([
             'name' => $request->name,
-            'description' => $request->description
+            'description' => $request->description,
+            'isActive' => $request->isActive
         ]);
         return response()->json([
             'success' => true,
@@ -85,7 +86,8 @@ class CategoryController extends Controller
 
         $category->update([
             'name' => $request->name,
-            'description' => $request->description
+            'description' => $request->description,
+            'isActive' => $request->isActive,
         ]);
 
         return response()->json([
