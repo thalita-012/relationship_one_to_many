@@ -7,12 +7,18 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     protected $fillable = [
+        'category_id',
         'name',
+        'image',
         'price',
-        'qty',
-        'category_id'
+        'stock',
+        'isActive',
     ];
-    public function category(){
+    protected $casts = [
+        'isActive' => 'boolean'
+    ];
+    public function category()
+    {
         return $this->belongsTo(Category::class);
     }
 }

@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\Category;
+use App\Models\Product;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-
-
-class CategoryController extends Controller
+class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,11 +15,11 @@ class CategoryController extends Controller
     public function index()
     {
         //
-        $categories =  Category::all();
+        $product = Product::with('category')->get();
         return response()->json([
             'success' => true,
-            'message' => 'Categories retrived successfully',
-            'data' => $categories
+            'message' => 'Product retrived successfully',
+            'data' => $product
         ]);
     }
 
@@ -29,19 +28,20 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => ['required']
-        ]);
-        $category = Category::create([
+        //
+        $product = Product::create([
             'name' => $request->name,
-            'description' => $request->description,
-            'isActive' => $request->has('isActive') ? $request->isActive : true
+            'image' => $request->image,
+            'price' => $request->price,
+            'stock' => $request->stock,
+            'isActive' => $request->isActive,
+            'category_id' => $request->category_id,
         ]);
         return response()->json([
             'success' => true,
-            'message' => 'Category created successfully',
-            'data' => $category
-        ], 201);
+            'message' => 'Product retrieved successfully',
+            'data' => $product
+        ]);
     }
 
     /**
@@ -49,20 +49,19 @@ class CategoryController extends Controller
      */
     public function show(string $id)
     {
-        $category = Category::find($id);
-
-        if (!$category) {
+        //
+       $product = Product::with('category')->find($id);
+        if (!$product) {
             return response()->json([
                 'success' => false,
-                'message' => 'Category not found'
+                'message' => 'Product Not Found'
             ], 404);
         }
-
         return response()->json([
             'success' => true,
-            'message' => 'Category retrieved successfully',
-            'data' => $category
-        ], 200);
+            'message' => 'Product retrieved successfully',
+            'data' => $product
+        ]);
     }
 
     /**
@@ -71,30 +70,26 @@ class CategoryController extends Controller
     public function update(Request $request, string $id)
     {
         //
-        $category = Category::find($id);
-
-        if (!$category) {
+        $product = Product::find($id);
+        if (!$product) {
             return response()->json([
                 'success' => false,
-                'message' => 'Category not found'
+                'message' => 'Product Not Found'
             ], 404);
         }
-
-        $request->validate([
-            'name' => ['required']
-        ]);
-
-        $category->update([
+        $product->update([
             'name' => $request->name,
-            'description' => $request->description,
-            'isActive' => $request->has('isActive') ? $request->isActive : $category->isActive,
+            'image' => $request->image,
+            'price' => $request->price,
+            'stock' => $request->stock,
+            'isActive' => $request->isActive,
+            'category_id' => $request->category_id,
         ]);
-
         return response()->json([
             'success' => true,
-            'message' => 'Category updated successfully',
-            'data' => $category
-        ], 200);
+            'message' => 'Product updated successfully',
+            'data' => $product
+        ]);
     }
 
     /**
@@ -103,20 +98,17 @@ class CategoryController extends Controller
     public function destroy(string $id)
     {
         //
-        $category = Category::find($id);
-
-        if (!$category) {
+        $product = Product::find($id);
+        if (!$product) {
             return response()->json([
                 'success' => false,
-                'message' => 'Category not found'
+                'message' => 'Product Not Found'
             ], 404);
         }
-
-        $category->delete();
-
+        $product->delete();
         return response()->json([
             'success' => true,
-            'message' => 'Category deleted successfully',
+            'message' => 'Product deleted successfully',
         ]);
     }
 }
