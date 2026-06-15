@@ -1,6 +1,7 @@
 <?php
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\ProductController;
+use App\Http\Controllers\Api\StudentController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -10,11 +11,8 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 
-Route::apiResource('categories', CategoryController::class);
-Route::apiResource('products', ProductController::class);
+Route::apiResource('categories', CategoryController::class)->names('api.category');
+Route::apiResource('products', ProductController::class)->names('api.product');
+Route::apiResource('students', StudentController::class)->names('api.students');
 
-// Route::get('/categories',[CategoryController::class, 'index']);
-// Route::post('/categories',[CategoryController::class, 'store']);
-// Route::get('/categories/{id}',[CategoryController::class, 'show']);
-// Route::put('/categories/{id}',[CategoryController::class, 'update']);
-// Route::delete('/categories/{id}',[CategoryController::class, 'destroy']);
+

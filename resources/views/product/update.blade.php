@@ -39,7 +39,7 @@
                 </div>
                 <div>
                     <label for="qty" class="block text-sm font-semibold text-slate-700 mb-1.5">Stock Quantity</label>
-                    <input type="number" min="0" name="qty" id="qty" value="{{ $product->qty }}" class="w-full rounded-lg border border-slate-200 bg-slate-50 px-3 py-2.5 text-sm focus:border-indigo-500 focus:bg-white focus:outline-none transition-all" required>
+                    <input type="number" min="0" name="qty" id="qty" value="{{ $product->stock }}" class="w-full rounded-lg border border-slate-200 bg-slate-50 px-3 py-2.5 text-sm focus:border-indigo-500 focus:bg-white focus:outline-none transition-all" required>
                 </div>
             </div>
 

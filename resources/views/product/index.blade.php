@@ -51,12 +51,12 @@
                                 </td>
                                 <td class="px-6 py-4 font-medium text-slate-900">${{ number_format($product->price, 2) }}</td>
                                 <td class="px-6 py-4">
-                                    @if($product->qty <= 0)
+                                    @if($product->stock <= 0)
                                         <span class="text-rose-600 font-medium bg-rose-50 px-2 py-0.5 rounded text-xs">Out of Stock</span>
-                                    @elseif($product->qty <= 5)
-                                        <span class="text-amber-600 font-medium bg-amber-50 px-2 py-0.5 rounded text-xs">{{ $product->qty }} Low Stock</span>
+                                    @elseif($product->stock <= 5)
+                                        <span class="text-amber-600 font-medium bg-amber-50 px-2 py-0.5 rounded text-xs">{{ $product->stock }} Low Stock</span>
                                     @else
-                                        <span class="text-slate-600 font-medium">{{ $product->qty }} units</span>
+                                        <span class="text-slate-600 font-medium">{{ $product->stock }} units</span>
                                     @endif
                                 </td>
                                 <td class="px-6 py-4 text-center space-x-3">

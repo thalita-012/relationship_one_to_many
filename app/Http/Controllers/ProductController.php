@@ -26,8 +26,9 @@ class ProductController extends Controller
         Product::create([
             'name' => request()->name,
             'price' => request()->price,
-            'qty' => request()->qty,
-            'category_id' => request()->category_id
+            'stock' => request()->qty,
+            'category_id' => request()->category_id,
+            'image' => 'default.png' // Added default value
         ]);
         return redirect('/product');
     }
@@ -43,8 +44,9 @@ class ProductController extends Controller
         $products->update([
             'name' => request()->name,
             'price' => request()->price,
-            'qty' => request()->qty,
-            'category_id' => request()->category_id
+            'stock' => request()->qty,
+            'category_id' => request()->category_id,
+            'image' => $products->image ?? 'default.png' // Maintain existing or use default
         ]);
         return redirect('/product');
     }

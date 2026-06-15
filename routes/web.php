@@ -3,17 +3,18 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\StudentController;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
 //category
-Route::get('/category', [categoryController::class, 'index'])->name('category.index');
-Route::get('/category/create', [categoryController::class, 'create'])->name('category.create');
-Route::post('/category/store', [categoryController::class, 'store'])->name('category.store');
-Route::get('/category/show/{id}', [categoryController::class, 'show'])->name('category.show');
-Route::get('/category/delete/{id}', [categoryController::class, 'delete'])->name('category.delete');
+Route::get('/category', [CategoryController::class, 'index'])->name('category.index');
+Route::get('/category/create', [CategoryController::class, 'create'])->name('category.create');
+Route::post('/category/store', [CategoryController::class, 'store'])->name('category.store');
+Route::get('/category/show/{id}', [CategoryController::class, 'show'])->name('category.show');
+Route::get('/category/delete/{id}', [CategoryController::class, 'delete'])->name('category.delete');
 
 
 //product
@@ -26,5 +27,5 @@ Route::get('/product/delete/{id}', [ProductController::class, 'delete'])->name('
 
 
 
-
+Route::resource('students', StudentController::class);
 
