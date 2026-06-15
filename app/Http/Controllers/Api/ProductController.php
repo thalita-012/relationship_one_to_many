@@ -114,9 +114,7 @@ class ProductController extends Controller
         ]);
     }
 
-    /**
-     * Transform product model to API shape.
-     */
+  
     private function transformProduct(Product $p)
     {
         $category = null;
